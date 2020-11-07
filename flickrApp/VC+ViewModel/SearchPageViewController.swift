@@ -47,6 +47,7 @@ class SearchPageViewController: UIViewController {
 																	   perPage: Int((self?.perPageTextField.text)!)!))
 												
 				self?.navigationController?.pushViewController(vc, animated: true)
+				vc.title = "Search result (\(self?.keywordTextField.text ?? ""))"
 			})
 			.disposed(by: disposeBag)
 	}

@@ -7,17 +7,42 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
+import RxDataSources
 
 class FavoritePageViewController: UIViewController {
 	@IBOutlet weak var favoriteCollectionView: UICollectionView!
 	
+	let viewModel: FavoritePageViewModel! = FavoritePageViewModel()
+	let disposeBag = DisposeBag()
+	
     override func viewDidLoad() {
         super.viewDidLoad()
-		imageCollectionView.register(UINib(nibName: "ImageCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "ImageCell")
-		
-		
-		
+		self.title = "Favorite"
+		setupImageCollectionViewLayout()
+		favoriteCollectionView.register(UINib(nibName: "ImageCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "ImageCell")
+		bindViewModel()
     }
+	
+	func bindViewModel() {
+		let viewModelInput = FavoritePageViewModel.Input(shouldUpdateData: self.rx.viewWillAppear.asObservable())
+		let viewModelOutput = viewModel.transform(input: viewModelInput)
+		
+		let dataSource = RxCollectionViewSectionedReloadDataSource<SectionModel<String, FlickrPhoto>>(
+			configureCell: { ds, collectionView, indexPath, item in
+				let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCell", for: indexPath) as! ImageCollectionViewCell
+				cell.imageView.sd_setImage(with: URL(string: item.imageURL), completed: nil)
+				cell.imageTitleLabel.text = item.title
+				cell.favoriteButton.isHidden = true
+				cell.downloadButton.isHidden = true
+				return cell
+		})
+		
+		viewModelOutput.didFetchFavoritePhotosData
+			.bind(to: favoriteCollectionView.rx.items(dataSource: dataSource))
+			.disposed(by: disposeBag)
+	}
 	
 	func setupImageCollectionViewLayout() {
 		let flowLayout = UICollectionViewFlowLayout()
