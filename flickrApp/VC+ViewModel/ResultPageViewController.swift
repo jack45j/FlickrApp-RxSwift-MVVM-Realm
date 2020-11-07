@@ -52,7 +52,7 @@ class ResultPageViewController: UIViewController {
 				
 				viewModelOutput.favoriteListDidChange
 					.subscribe(onNext: { photos in
-						cell.favoriteButton.setImage(photos.isContains(item) ?
+						cell.favoriteButton.setImage(photos.contains(item) ?
 							UIImage(systemName: "heart.fill") :
 							UIImage(systemName: "heart"), for: .normal)
 					})

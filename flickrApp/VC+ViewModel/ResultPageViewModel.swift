@@ -63,7 +63,7 @@ class ResultPageViewModel: ViewModelType {
 			.subscribe(onNext: { [weak self] photo in
 				let favPhotos = self?.dependencies.favPhotos
 				let realm = try! Realm()
-				if favPhotos?.value.isContains(photo) ?? false {
+				if favPhotos?.value.contains(photo) ?? false {
 					if let realmPhoto = realm.objects(RealmFlickrPhoto.self).queryBy(uuid: favPhotos?.value.queryExistElement(from: photo)?.realmUUID ?? "") {
 						try! realm.write {
 							realm.delete(realmPhoto)

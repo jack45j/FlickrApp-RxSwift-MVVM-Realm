@@ -9,7 +9,6 @@
 import Foundation
 
 extension Array where Element == FlickrPhoto {
-	func isContains(_ photo: Element) -> Bool { self.contains(where: { $0 == photo }) }
 	
 	func queryExistElement(from photo: Element) -> Element? {
 		for item in self {
