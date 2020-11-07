@@ -21,7 +21,8 @@ class ResultPageViewController: UIViewController {
 	var disposeBag = DisposeBag()
 	var viewModel: ResultPageViewModel!
 	
-	var shouldDownloadImage: PublishSubject<FlickrPhoto> = PublishSubject()
+	var shouldDownloadImage: PublishSubject<FlickrPhoto> = .init()
+	var shouldFavImage: PublishSubject<FlickrPhoto> = .init()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,8 +33,10 @@ class ResultPageViewController: UIViewController {
 	}
 	
 	func bindViewModel() {
-		let isNearBottom = imageCollectionView.rx.contentOffset.throttle(.milliseconds(300), scheduler: MainScheduler.instance).map { _ in self.imageCollectionView.isNearBottomEdge() }
-		let viewModelInput = ResultPageViewModel.Input(shouldLoadNextPage: isNearBottom, didTapImageDownloadButton: shouldDownloadImage.asObservable())
+		let isNearBottom = imageCollectionView.rx.contentOffset.throttle(.milliseconds(300), scheduler: MainScheduler.instance).map { [weak self] _ in self?.imageCollectionView.isNearBottomEdge() ?? false }
+		let viewModelInput = ResultPageViewModel.Input(shouldLoadNextPage: isNearBottom,
+													   didTapImageDownloadButton: shouldDownloadImage.asObservable(),
+													   didTapImageFavButton: shouldFavImage.asObservable())
 		let viewModelOutput = viewModel.transform(input: viewModelInput)
 		
 		let dataSource = RxCollectionViewSectionedReloadDataSource<SectionModel<String, FlickrPhoto>>(
@@ -45,6 +48,22 @@ class ResultPageViewController: UIViewController {
 					.map { item }
 					.bind(to: self.shouldDownloadImage)
 					.disposed(by: cell.disposeBag)
+				
+				viewModelOutput.favoriteListDidChange
+					.subscribe(onNext: { photos in
+						cell.favoriteButton.setImage(photos.isContains(item) ?
+							UIImage(systemName: "heart.fill") :
+							UIImage(systemName: "heart"), for: .normal)
+					})
+					.disposed(by: cell.disposeBag)
+				
+				
+				cell.favoriteButton.rx.tap
+					.map { item }
+					.do(onNext: { [weak self] _ in self?.imageCollectionView.reloadItemsAtIndexPaths([indexPath], animationStyle: .automatic) })
+					.bind(to: self.shouldFavImage)
+					.disposed(by: cell.disposeBag)
+				
 				return cell
 		})
 		

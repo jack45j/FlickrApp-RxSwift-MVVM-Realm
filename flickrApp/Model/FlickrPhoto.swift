@@ -7,19 +7,20 @@
 //
 
 import Foundation
+import RealmSwift
 
-struct FlickrPhoto: Codable {
+struct FlickrPhoto: Codable, Equatable {
+	var realmUUID: String = ""
+    let farm: Int
+    let id: String
     
-    let farm : Int
-    let id : String
-    
-    let isfamily : Int
-    let isfriend : Int
-    let ispublic : Int
+    let isfamily: Int
+    let isfriend: Int
+    let ispublic: Int
     
     let owner: String
-    let secret : String
-    let server : String
+    let secret: String
+    let server: String
     let title: String
     
     enum CodingKeys: String, CodingKey {
@@ -52,9 +53,36 @@ struct FlickrPhoto: Codable {
         title = try container.decode(String.self, forKey: .title)
     }
 	
+	init(uuid: String = "", farm: Int = 0, id: String = "", isFamily: Int = 0, isFriend: Int = 0, isPublic: Int = 0, owner: String = "", secret: String = "", server: String = "", title: String = "") {
+		self.realmUUID = uuid
+		self.farm = farm
+		self.id = id
+		self.isfamily = isFamily
+		self.isfriend = isFriend
+		self.ispublic = isPublic
+		self.owner = owner
+		self.secret = secret
+		self.server = server
+		self.title = title
+	}
+	
 	var imageURL: String {
 		let urlString = String(format: FlickrConstants.imageURL, farm, server, id, secret)
         return urlString
     }
+	
+	func toRealmFlickPhoto() -> RealmFlickrPhoto {
+		let realmPhoto = RealmFlickrPhoto()
+		realmPhoto.id = self.id
+		realmPhoto.farm = self.farm
+		realmPhoto.server = self.server
+		realmPhoto.isfamily = self.isfamily
+		realmPhoto.isfriend = self.isfriend
+		realmPhoto.ispublic = self.ispublic
+		realmPhoto.owner = self.owner
+		realmPhoto.secret = self.secret
+		realmPhoto.title = self.title
+		return realmPhoto
+	}
 }
 

@@ -43,11 +43,22 @@
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" backgroundImage="icloud.and.arrow.down.fill" catalog="system"/>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6E0-pe-a1D">
+                                <rect key="frame" x="533" y="17.5" width="32" height="26.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="6E0-pe-a1D" secondAttribute="height" multiplier="32:29" id="DcF-Mc-fTr"/>
+                                    <constraint firstAttribute="width" constant="32" id="xeg-2a-4rl"/>
+                                </constraints>
+                                <color key="tintColor" systemColor="systemPinkColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" backgroundImage="heart" catalog="system"/>
+                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="BiN-jT-5d1" secondAttribute="trailing" constant="8" id="DQp-1Q-lzV"/>
                             <constraint firstItem="Gy7-Uc-cV2" firstAttribute="top" secondItem="YSy-ek-KrO" secondAttribute="top" id="Oa9-d9-1yK"/>
+                            <constraint firstAttribute="trailing" secondItem="6E0-pe-a1D" secondAttribute="trailing" constant="8" id="RNE-ot-zfA"/>
                             <constraint firstAttribute="bottom" secondItem="DLg-Nk-7jG" secondAttribute="bottom" id="ZE8-z9-Vvo"/>
+                            <constraint firstItem="6E0-pe-a1D" firstAttribute="top" secondItem="YSy-ek-KrO" secondAttribute="top" constant="16" id="ZiQ-Bj-Phh"/>
                             <constraint firstItem="DLg-Nk-7jG" firstAttribute="top" secondItem="BiN-jT-5d1" secondAttribute="bottom" constant="16" id="g8i-qL-FZU"/>
                             <constraint firstItem="DLg-Nk-7jG" firstAttribute="leading" secondItem="YSy-ek-KrO" secondAttribute="leading" constant="8" id="hwG-s8-s9G"/>
                             <constraint firstAttribute="trailing" secondItem="DLg-Nk-7jG" secondAttribute="trailing" constant="8" id="mb5-eF-PM6"/>
@@ -68,6 +79,7 @@
             <size key="customSize" width="567" height="639"/>
             <connections>
                 <outlet property="downloadButton" destination="BiN-jT-5d1" id="hRG-9u-Oal"/>
+                <outlet property="favoriteButton" destination="6E0-pe-a1D" id="kwg-pk-OQ0"/>
                 <outlet property="imageTitleLabel" destination="DLg-Nk-7jG" id="eJu-hE-c7f"/>
                 <outlet property="imageView" destination="Gy7-Uc-cV2" id="U1n-t7-RNg"/>
             </connections>
@@ -75,6 +87,7 @@
         </collectionViewCell>
     </objects>
     <resources>
+        <image name="heart" catalog="system" width="64" height="54"/>
         <image name="icloud.and.arrow.down.fill" catalog="system" width="64" height="56"/>
     </resources>
 </document>

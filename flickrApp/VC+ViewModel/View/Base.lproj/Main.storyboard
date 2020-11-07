@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="iJ9-iO-aPP">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="SEm-Gg-LMA">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
@@ -97,20 +97,60 @@
             <point key="canvasLocation" x="3232" y="-231"/>
         </scene>
         <!--Favorite-->
+        <scene sceneID="7YI-xx-eab">
+            <objects>
+                <navigationController id="moQ-ee-RGx" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Favorite" image="heart.circle" catalog="system" selectedImage="heart.circle.fill" id="nfG-bQ-w77"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="cD5-jL-dnQ">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="t5P-LG-hO2" kind="relationship" relationship="rootViewController" id="ENr-yj-GXn"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6C2-T0-OLA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1790" y="431"/>
+        </scene>
+        <!--Favorite-->
         <scene sceneID="lqb-CK-zRV">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="lQd-6g-ddJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <viewController id="t5P-LG-hO2" sceneMemberID="viewController">
+                <viewController id="t5P-LG-hO2" customClass="FavoritePageViewController" customModule="flickrApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="6kV-9z-kAC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Fhq-L5-h9V">
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="7iE-2J-ooR">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="Fhq-L5-h9V" firstAttribute="trailing" secondItem="Xfn-qZ-PHw" secondAttribute="trailing" id="3E8-Ir-U4s"/>
+                            <constraint firstItem="Fhq-L5-h9V" firstAttribute="top" secondItem="Xfn-qZ-PHw" secondAttribute="top" id="DS6-T5-ESA"/>
+                            <constraint firstItem="Fhq-L5-h9V" firstAttribute="leading" secondItem="Xfn-qZ-PHw" secondAttribute="leading" id="JgO-a3-aKD"/>
+                            <constraint firstItem="Fhq-L5-h9V" firstAttribute="bottom" secondItem="Xfn-qZ-PHw" secondAttribute="bottom" id="hyS-ha-5Bo"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="Xfn-qZ-PHw"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Favorite" image="heart.circle" catalog="system" selectedImage="heart.circle.fill" id="gGk-Ae-djP"/>
+                    <navigationItem key="navigationItem" id="hdP-M4-O8g"/>
+                    <connections>
+                        <outlet property="favoriteCollectionView" destination="Fhq-L5-h9V" id="80B-kP-FQI"/>
+                    </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lQd-6g-ddJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2512" y="463"/>
+            <point key="canvasLocation" x="2511.594202898551" y="430.58035714285711"/>
         </scene>
         <!--Search Page-->
         <scene sceneID="ER2-3D-P3O">
@@ -123,29 +163,30 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="VDk-x5-SwD"/>
-                        <segue destination="t5P-LG-hO2" kind="relationship" relationship="viewControllers" id="BMQ-hb-5Ra"/>
+                        <segue destination="iJ9-iO-aPP" kind="relationship" relationship="viewControllers" id="o0Q-bh-XPA"/>
+                        <segue destination="moQ-ee-RGx" kind="relationship" relationship="viewControllers" id="Rus-BV-OEl"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5d8-uR-Gw2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1591" y="139"/>
+            <point key="canvasLocation" x="612" y="127"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Search-->
         <scene sceneID="sJ2-Ql-Nnf">
             <objects>
                 <navigationController id="iJ9-iO-aPP" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Search" image="magnifyingglass.circle" catalog="system" selectedImage="magnifyingglass.circle.fill" id="0S1-vR-kR7"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="WCW-YH-ynr">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="SEm-Gg-LMA" kind="relationship" relationship="rootViewController" id="xP7-9D-PTy"/>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="a5q-yC-non"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6mE-Hx-OL4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="867" y="139"/>
+            <point key="canvasLocation" x="1790" y="-231"/>
         </scene>
     </scenes>
     <resources>

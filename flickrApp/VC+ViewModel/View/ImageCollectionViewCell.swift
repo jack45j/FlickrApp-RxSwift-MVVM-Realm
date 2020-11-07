@@ -14,6 +14,7 @@ class ImageCollectionViewCell: UICollectionViewCell {
 	@IBOutlet weak var imageView: UIImageView!
 	@IBOutlet weak var imageTitleLabel: UILabel!
 	@IBOutlet weak var downloadButton: UIButton!
+	@IBOutlet weak var favoriteButton: UIButton!
 	
     override func awakeFromNib() {
         super.awakeFromNib()

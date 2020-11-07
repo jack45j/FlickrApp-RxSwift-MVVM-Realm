@@ -9,6 +9,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import RealmSwift
 
 class SearchPageViewController: UIViewController {
 	@IBOutlet weak var keywordTextField: UITextField!

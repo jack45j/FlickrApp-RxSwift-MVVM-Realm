@@ -12,4 +12,5 @@ target 'flickrApp' do
 	pod 'RxAlamofire'
 	pod 'SDWebImage'
 	pod 'NotificationBannerSwift', '~> 3.0.0'
+	pod 'RealmSwift'
 end
