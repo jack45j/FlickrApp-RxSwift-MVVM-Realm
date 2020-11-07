@@ -84,5 +84,17 @@ struct FlickrPhoto: Codable, Equatable {
 		realmPhoto.title = self.title
 		return realmPhoto
 	}
+	
+	static func == (lhs: FlickrPhoto, rhs: FlickrPhoto) -> Bool {
+	   return  lhs.farm == rhs.farm &&
+			   lhs.id == rhs.id &&
+			   lhs.isfamily == rhs.isfamily &&
+			   lhs.isfriend == rhs.isfriend &&
+			   lhs.ispublic == rhs.ispublic &&
+			   lhs.owner == rhs.owner &&
+			   lhs.secret == rhs.secret &&
+			   lhs.server == rhs.server &&
+			   lhs.title == rhs.title
+	}
 }
 

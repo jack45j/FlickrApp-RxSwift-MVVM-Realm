@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Photos
 import RxSwift
 import RxCocoa
 import RealmSwift
@@ -21,6 +22,7 @@ class SearchPageViewController: UIViewController {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		PHPhotoLibrary.requestAuthorization({ _ in })
 		bindViewModel()
 	}
 	

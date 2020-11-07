@@ -1,5 +1,5 @@
 //
-//  Networking.swift
+//  Endpoint.swift
 //  flickrApp
 //
 //  Created by Yi-Cheng Lin on 2020/11/6.

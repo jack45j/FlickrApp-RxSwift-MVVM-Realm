@@ -12,7 +12,6 @@ import RxCocoa
 import RxDataSources
 import RxAlamofire
 import SDWebImage
-import Photos
 import NotificationBannerSwift
 
 class ResultPageViewController: UIViewController {
@@ -26,14 +25,16 @@ class ResultPageViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-		PHPhotoLibrary.requestAuthorization({ _ in })
 		setupImageCollectionViewLayout()
 		imageCollectionView.register(UINib(nibName: "ImageCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "ImageCell")
 		bindViewModel()
 	}
 	
 	func bindViewModel() {
-		let isNearBottom = imageCollectionView.rx.contentOffset.throttle(.milliseconds(300), scheduler: MainScheduler.instance).map { [weak self] _ in self?.imageCollectionView.isNearBottomEdge() ?? false }
+		let isNearBottom = imageCollectionView.rx.contentOffset
+			.throttle(.milliseconds(300), scheduler: MainScheduler.instance)
+			.map { [weak self] _ in self?.imageCollectionView.isNearBottomEdge() ?? false }
+		
 		let viewModelInput = ResultPageViewModel.Input(shouldLoadNextPage: isNearBottom,
 													   didTapImageDownloadButton: shouldDownloadImage.asObservable(),
 													   didTapImageFavButton: shouldFavImage.asObservable())
