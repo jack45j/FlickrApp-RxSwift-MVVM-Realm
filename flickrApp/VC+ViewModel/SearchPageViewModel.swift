@@ -12,9 +12,9 @@ import RxCocoa
 
 class SearchPageViewModel: ViewModelType {
 	struct Input {
-		let keywordDidChange: ControlProperty<String?>
+		let keywordDidChange: Observable<String?>
 		let perPageDidChange: Observable<String>
-		let searchButtonDidTap: ControlEvent<Void>
+		let searchButtonDidTap: Observable<Void>
 	}
 	
 	struct Output {

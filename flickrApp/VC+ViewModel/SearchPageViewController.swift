@@ -31,9 +31,9 @@ class SearchPageViewController: UIViewController {
 			.map(digitsOnly)
 			.do(onNext: setPreservingCursor(on: perPageTextField))
 		
-		let viewModelInput = SearchPageViewModel.Input(keywordDidChange: keywordTextField.rx.text,
+		let viewModelInput = SearchPageViewModel.Input(keywordDidChange: keywordTextField.rx.text.asObservable(),
 													   perPageDidChange: digitsOnlyPerPage,
-													   searchButtonDidTap: searchButton.rx.tap)
+													   searchButtonDidTap: searchButton.rx.tap.asObservable())
 		let viewModelOutput = viewModel.transform(input: viewModelInput)
 		
 		viewModelOutput.shouldResearchButtonEnable
