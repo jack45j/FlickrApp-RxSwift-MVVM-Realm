@@ -34,7 +34,7 @@ class SearchPageViewModel: ViewModelType {
 		let shouldEnableSearchButton = Observable
 			.combineLatest(input.keywordDidChange,
 						   input.perPageDidChange)
-			.map { !($0.0?.isEmpty ?? false) && !($0.1.isEmpty) && (Int($0.1) ?? 0 >= 20) }
+			.map { !($0.0?.isEmpty ?? true) && !($0.1.isEmpty) && (Int($0.1) ?? 0 >= 20) }
 		
 		return Output(shouldResearchButtonEnable: shouldEnableSearchButton, pushToResultPage: input.searchButtonDidTap.asObservable())
 	}

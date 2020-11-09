@@ -33,19 +33,26 @@ class flickrAppTests: XCTestCase {
         super.tearDown()
     }
 
-    func testSearchPageViewModel_ButtonEnable_ValidKeyword_InvalidPerPage() {
+    func testSearchPageViewModel_ButtonEnable() {
 		let keywords: TestableObservable<String?> = testScheduler.createHotObservable([
-			.next(100, "abc")
+			.next(100, "abc"), .next(500, nil)
 		])
 		
 		let perPages = testScheduler.createHotObservable([
-			.next(150, "1"),
-			.next(200, "0"),
-			.next(250, "-1"),
-			.next(300, "abc"),
-			.next(350, "19"),
-			.next(400, "-*/_!&#_)$#*(&"),
-			.next(450, "🤣🤣🤣")
+			.next(150, "0"),
+			.next(200, "-1"),
+			.next(250, "abc"),
+			.next(300, "19"),
+			.next(350, "-*/_!&#_)$#*(&"),
+			.next(400, "🤣🤣🤣"),
+			.next(450, "20"),
+			.next(550, "0"),
+			.next(600, "-1"),
+			.next(650, "abc"),
+			.next(700, "19"),
+			.next(750, "-*/_!&#_)$#*(&"),
+			.next(800, "🤣🤣🤣"),
+			.next(850, "20")
 		])
 		
 		let input = SearchPageViewModel.Input(keywordDidChange: keywords.asObservable(),
@@ -69,7 +76,15 @@ class flickrAppTests: XCTestCase {
 			.next(300, false),
 			.next(350, false),
 			.next(400, false),
-			.next(450, false)
+			.next(450, true),
+			.next(500, false),
+			.next(550, false),
+			.next(600, false),
+			.next(650, false),
+			.next(700, false),
+			.next(750, false),
+			.next(800, false),
+			.next(850, false)
 		])
     }
 }
